@@ -1,0 +1,156 @@
+[
+    {
+        "id": 1,
+        "name": "Leanne Graham",
+        "address": {
+
+            "location": "Brooklyn, NY",
+            "geo": {
+                "lat": "40.6782",
+                "lng": "-73.9442"
+            }
+        },
+
+        "equipType": "VanorReefer",
+        "phone": "992-323-6794"  
+
+    },
+
+    {
+        "id": 2,
+        "name": "Ervin Howell",
+        "address": {
+
+            "location": "Denver, CO",
+            "geo": {
+                "lat": "39.7392",
+                "lng": "-104.9903"
+            }
+        },
+
+        "equipType": "Flatbed",
+        "phone": "675-215-6794"  
+
+    },
+    {
+        "id": 3,
+        "name": "Clementine Bauch",
+        "address": {
+
+            "location": "Hartford, CT",
+            "geo": {
+                "lat": "41.7658",
+                "lng": "-72.6734"
+            }
+        },
+
+        "equipType": "Reefer",
+        "phone": "775-212-6794"  
+
+    },
+
+    {
+        "id": 4,
+        "name": "Patricia Lebsack",
+        "address": {
+
+            "location": "Boise, ID",
+            "geo": {
+                "lat": "43.6150",
+                "lng": "-116.2023"
+            }
+        },
+
+        "equipType": "Step Deck",
+        "phone": "775-976-2223"  
+
+    },
+
+    {
+        "id": 5,
+        "name": "Chelsey Dietrich",
+        "address": {
+
+            "location": "Bronx, NY",
+            "geo": {
+                "lat": "40.8448",
+                "lng": "-73.8648"
+            }
+        },
+
+        "equipType": "Intermodal",
+        "phone": "735-666-6794"  
+
+    },
+
+    {
+        "id": 6,
+        "name": "Mrs. Dennis Schulist",
+        "address": {
+
+            "location": "Queens, NY",
+            "geo": {
+                "lat": "40.7282",
+                "lng": "-73.7949"
+            }
+        },
+
+        "equipType": "Power Only",
+        "phone": "775-976-5554"  
+
+    },
+
+    {
+        "id": 7,
+        "name": "Kurtis Weissnat",
+        "address": {
+
+            "location": "Annapolis, MD",
+            "geo": {
+                "lat": "38.9784",
+                "lng": "-76.4922"
+            }
+        },
+
+        "equipType": "Conestoga",
+        "phone": "575-776-6794"  
+
+    },
+
+    {
+        "id": 8,
+        "name": "Nicholas Runolfsdottir V",
+        "address": {
+
+            "location": "Columbus, OH",
+            "geo": {
+                "lat": "39.9612",
+                "lng": "-82.9988"
+            }
+        },
+
+        "equipType": "Lowboy",
+        "phone": "775-955-6794"  
+
+    },
+
+    {
+        "id": 9,
+        "name": "Glenna Reichert",
+        "address": {
+
+            "location": "Columbia, SC",
+            "geo": {
+                "lat": "34.0007",
+                "lng": "-81.0348"
+            }
+        },
+
+        "equipType": "Lowboy",
+        "phone": "775-976-6794"  
+
+    }
+
+
+
+]

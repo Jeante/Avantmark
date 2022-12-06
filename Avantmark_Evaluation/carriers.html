@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Checking Proximity</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="container d-flex justify-content-center">
+
+    <div class="row justify-content-center">
+
+      <h1 class="row justify-content-center">SEARCH FOR CARRIERS </h1>
+      <br>
+      <br>
+      <!--Form used to retrieve user input-->
+      <form id="form" onsubmit="return false">
+
+        <div class="form-group">
+          <!--Field to input location-->
+          <label><b>Location (City, State):</b></label><br>
+          <input type="text" class="form-control" name="location" id="location" placeholder="Brooklyn, NY" required><br>
+        </div>
+
+        <div class="form-group">
+          <!--Field to input radius in kilometers-->
+          <label><b>Radius in KM:</b></label><br>
+          <input type="number" class="form-control" name="radius" id="radius" required><br>
+        </div>
+
+        <div class="form-group">
+          <!--Field to input equipment type-->
+          <label><b>Equipment Type:</b> *Optional*</label><br>
+          <input type="text" class="form-control" name="equipment" id="equipment"><br>
+        </div>
+
+        <!--Submit button for form-->
+        <button type="submit" class="btn btn-primary" onclick="validate()">Submit</button><br>
+
+      </form>
+      <br>
+      <br>
+      <p class="row justify-content-center" id="demo"></p>
+
+    </div>
+  </div>
+
+  <script>
+
+    //constant used to store JSON file
+    const api_url = './carriers.json';
+
+    //function used to calculate the distance between two points given the latitude and longitude
+    function distance(lat1, lat2, lon1, lon2) {
+
+      // The math module contains a function
+      // named toRadians which converts from
+      // degrees to radians.
+      lon1 = lon1 * Math.PI / 180;
+      lon2 = lon2 * Math.PI / 180;
+      lat1 = lat1 * Math.PI / 180;
+      lat2 = lat2 * Math.PI / 180;
+
+      // Haversine formula
+      let dlon = lon2 - lon1;
+      let dlat = lat2 - lat1;
+      let a = Math.pow(Math.sin(dlat / 2), 2)
+        + Math.cos(lat1) * Math.cos(lat2)
+        * Math.pow(Math.sin(dlon / 2), 2);
+
+      let c = 2 * Math.asin(Math.sqrt(a));
+
+      // Radius of earth in kilometers. Use 3956
+      // for miles
+      let r = 6371;
+
+      // calculate the result
+      return (c * r);
+    }
+
+
+    //function used 
+    async function validate() {
+
+      var location = document.getElementById("location");
+      var radius = document.getElementById("radius");
+      var equipment = document.getElementById("equipment");
+
+      document.getElementById("demo").innerHTML = "";
+
+      //Used to get the latitude and longitude from location field
+      const api_url2 = 'https://carriersfix.herokuapp.com/http://getnearbycities.geobytes.com/GetNearbyCities?callback=&radius=10mi&locationcode=' + location.value + ', United States';
+
+      //Fetches data from the carrier JSON file 
+      const response = await fetch(api_url);
+      //Data is parsed and stored in a constant
+      const data = await response.json();
+
+      //Fetches data from the JSON file 
+      const response2 = await fetch(api_url2);
+      //Data is parsed and stored in a constant
+      const data2 = await response2.json();
+
+      //if statement used to check if values are empty
+      if (data2[0] != '' && radius.value > 0 && data2 !== "" && location.value != '') {
+
+        document.getElementById("demo").innerHTML += "Results from the search:" + '<br />' + '<br />';
+
+        //for loop that iterate through the JSON file
+        for (var q = 0; q < data.length; q++) {
+
+          //variable used to store the result of the calculation
+          var result = (distance(data2[0][8], data[q].address.geo.lat, data2[0][10], data[q].address.geo.lng))
+
+          if (parseFloat(radius.value) >= parseFloat(result)) {
+
+            //if statement used to check the optional field
+            if (equipment.value != "") {
+
+              if (data[q].equipType == equipment.value) {
+
+                document.getElementById("demo").innerHTML += '<li>' + (data[q].name) + "(" + (data[q].phone) + ")" + "-" + (data[q].address.location) + '</li>' + '<br />';
+
+                console.log(data[q]);
+
+              }
+
+            }
+            else {
+
+              document.getElementById("demo").innerHTML += '<li>' + (data[q].name) + "(" + (data[q].phone) + ")" + "-" + (data[q].address.location) + '</li>' + '<br />';
+
+            }
+
+          }
+
+        }
+        //used to reset form
+        document.getElementById('form').reset();
+      }
+      else {
+        setTimeout(function () {
+          alert("Nothing to Display. Try again")
+        }
+          , 200);
+
+      }
+    }
+  </script>
+
+</body>
+
+</html>
